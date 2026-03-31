@@ -1,0 +1,9 @@
+[build]
+  publish = "out"
+  command = "echo 'pre-built'"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+  [plugins.inputs]
+    disable = true
