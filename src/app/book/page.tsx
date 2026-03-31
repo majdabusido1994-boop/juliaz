@@ -34,10 +34,6 @@ import {
   isSunday,
 } from "date-fns";
 
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
-
 const serviceOptions = [
   {
     id: "intuitive-massage-reiki",
@@ -68,19 +64,7 @@ const serviceOptions = [
   },
 ];
 
-const timeSlots = [
-  "9:00",
-  "10:00",
-  "11:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-];
-
-/* ------------------------------------------------------------------ */
-/*  Calendar component                                                 */
-/* ------------------------------------------------------------------ */
+const timeSlots = ["9:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"];
 
 function Calendar({
   selected,
@@ -112,43 +96,37 @@ function Calendar({
   );
 
   return (
-    <div className="rounded-2xl border border-border bg-warm-white p-5 shadow-sm">
-      {/* Month nav */}
+    <div className="rounded-2xl border border-gray-200 bg-white p-5">
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-          className="cursor-pointer rounded-lg p-2 text-text-secondary transition-colors duration-200 hover:bg-primary-light/30 hover:text-text-primary"
+          className="cursor-pointer rounded-lg p-2 text-purple-600 hover:bg-purple-50 transition-colors"
           aria-label="Previous month"
         >
           <ChevronLeft size={20} />
         </button>
-        <h3 className="font-heading text-lg font-semibold text-text-primary">
+        <h3 className="text-lg font-semibold text-purple-950 heading-font">
           {format(currentMonth, "MMMM yyyy")}
         </h3>
         <button
           type="button"
           onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-          className="cursor-pointer rounded-lg p-2 text-text-secondary transition-colors duration-200 hover:bg-primary-light/30 hover:text-text-primary"
+          className="cursor-pointer rounded-lg p-2 text-purple-600 hover:bg-purple-50 transition-colors"
           aria-label="Next month"
         >
           <ChevronRight size={20} />
         </button>
       </div>
 
-      {/* Weekday headers */}
       <div className="mt-4 grid grid-cols-7 text-center">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-          <span
-            key={d}
-            className="pb-2 font-body text-xs font-medium uppercase tracking-wider text-text-muted"
-          >
+          <span key={d} className="pb-2 text-xs font-medium uppercase tracking-wider text-purple-400">
             {d}
           </span>
         ))}
       </div>
 
-      {/* Days grid */}
       <div className="grid grid-cols-7 gap-1">
         {days.map((day, idx) => {
           const inMonth = isSameMonth(day, currentMonth);
@@ -163,29 +141,17 @@ function Calendar({
               disabled={disabled || !inMonth}
               onClick={() => onSelect(day)}
               className={`
-                relative flex h-10 w-full items-center justify-center rounded-lg font-body text-sm transition-all duration-150
+                relative flex h-10 w-full items-center justify-center rounded-lg text-sm transition-all duration-150
                 ${!inMonth ? "invisible" : ""}
-                ${
-                  disabled && inMonth
-                    ? "cursor-not-allowed text-text-muted/40"
-                    : ""
-                }
-                ${
-                  !disabled && inMonth && !isSelected
-                    ? "cursor-pointer text-text-primary hover:bg-primary-light/40"
-                    : ""
-                }
-                ${
-                  isSelected
-                    ? "cursor-pointer bg-primary text-white font-medium shadow-md"
-                    : ""
-                }
+                ${disabled && inMonth ? "cursor-not-allowed text-gray-300" : ""}
+                ${!disabled && inMonth && !isSelected ? "cursor-pointer text-purple-950 hover:bg-purple-50" : ""}
+                ${isSelected ? "cursor-pointer bg-gold-500 text-white font-medium shadow-md" : ""}
               `}
               aria-label={format(day, "EEEE, MMMM d, yyyy")}
             >
               {format(day, "d")}
               {isToday && !isSelected && (
-                <span className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary" />
+                <span className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-gold-500" />
               )}
             </button>
           );
@@ -195,47 +161,42 @@ function Calendar({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Success modal                                                      */
-/* ------------------------------------------------------------------ */
-
 function SuccessModal({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", damping: 25 }}
-        className="relative w-full max-w-md rounded-3xl bg-warm-white p-8 text-center shadow-2xl"
+        className="relative w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl"
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 cursor-pointer rounded-full p-1.5 text-text-muted transition-colors hover:bg-primary-light/30 hover:text-text-primary"
+          className="absolute top-4 right-4 cursor-pointer rounded-full p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
           aria-label="Close"
         >
           <X size={20} />
         </button>
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage-light">
-          <Check size={32} className="text-sage" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+          <Check size={32} className="text-green-600" />
         </div>
-        <h2 className="mt-6 font-heading text-2xl font-semibold text-text-primary">
+        <h2 className="mt-6 text-2xl font-bold text-purple-950 heading-font">
           Booking Confirmed
         </h2>
-        <p className="mt-3 font-body text-sm text-text-secondary leading-relaxed">
-          Thank you for booking with Julia. You will receive a confirmation
-          shortly. Looking forward to seeing you!
+        <p className="mt-3 text-sm text-purple-700 leading-relaxed">
+          Thank you for booking with Julia. You will receive a confirmation shortly.
         </p>
         <button
           type="button"
           onClick={onClose}
-          className="mt-8 cursor-pointer rounded-full bg-primary px-8 py-3 font-body text-sm font-medium text-white transition-all duration-200 hover:bg-primary-dark hover:shadow-lg"
+          className="mt-8 cursor-pointer rounded-full bg-gold-500 px-8 py-3 text-sm font-medium text-white hover:bg-gold-400 transition-all"
         >
           Done
         </button>
@@ -244,13 +205,9 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Main page                                                          */
-/* ------------------------------------------------------------------ */
-
 export default function BookPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-warm-white" />}>
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
       <BookPageContent />
     </Suspense>
   );
@@ -259,7 +216,6 @@ export default function BookPage() {
 function BookPageContent() {
   const searchParams = useSearchParams();
 
-  /* State */
   const [serviceId, setServiceId] = useState("");
   const [variantIdx, setVariantIdx] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -271,7 +227,6 @@ function BookPageContent() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-  /* Pre-select from query param */
   useEffect(() => {
     const sp = searchParams.get("service");
     if (sp && serviceOptions.find((s) => s.id === sp)) {
@@ -279,11 +234,9 @@ function BookPageContent() {
     }
   }, [searchParams]);
 
-  /* Derived */
   const selectedService = serviceOptions.find((s) => s.id === serviceId);
   const selectedVariant = selectedService?.variants[variantIdx];
 
-  /* Validation */
   const validate = () => {
     const errors: Record<string, string> = {};
     if (!serviceId) errors.service = "Please select a service";
@@ -298,7 +251,6 @@ function BookPageContent() {
     return Object.keys(errors).length === 0;
   };
 
-  /* Submit */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
@@ -316,13 +268,9 @@ function BookPageContent() {
       notes: notes.trim(),
       createdAt: new Date().toISOString(),
     };
-
-    const existing = JSON.parse(
-      localStorage.getItem("juliaBookings") || "[]"
-    );
+    const existing = JSON.parse(localStorage.getItem("juliaBookings") || "[]");
     existing.push(booking);
     localStorage.setItem("juliaBookings", JSON.stringify(existing));
-
     setShowSuccess(true);
   };
 
@@ -339,62 +287,44 @@ function BookPageContent() {
     setShowSuccess(false);
   };
 
+  const inputClass =
+    "mt-1.5 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-purple-950 placeholder:text-gray-400 outline-none transition-all duration-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100";
+
   return (
-    <div className="min-h-screen bg-warm-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-cream pt-32 pb-16 lg:pt-40 lg:pb-20">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 right-1/4 h-64 w-64 rounded-full bg-sage-light/50 blur-3xl" />
-          <div className="absolute bottom-10 left-1/3 h-56 w-56 rounded-full bg-lavender-light/40 blur-3xl" />
+    <>
+      {/* Hero Banner */}
+      <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-purple-950 to-purple-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-gold-400 rounded-full blur-3xl" />
         </div>
-        <div className="relative mx-auto max-w-3xl px-6 text-center lg:px-8">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-body text-sm font-medium uppercase tracking-[0.2em] text-primary-dark"
-          >
-            Book a Session
-          </motion.p>
+        <div className="relative max-w-3xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-4 font-heading text-4xl font-semibold text-text-primary sm:text-5xl"
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-5xl font-bold text-white heading-font"
           >
-            Reserve Your Time
+            Book a Session
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4 font-body text-base text-text-secondary leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-purple-300 text-lg mt-4"
           >
-            Choose your service, pick a date and time, and take the first step
-            toward your well-being.
+            Choose your service, pick a date, and take the first step.
           </motion.p>
         </div>
       </section>
 
-      {/* Booking form */}
-      <section className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-24">
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          className="grid gap-12 lg:grid-cols-[1fr_380px]"
-        >
-          {/* Left column: selections & form */}
-          <div className="flex flex-col gap-10">
+      {/* Booking Form */}
+      <section className="max-w-6xl mx-auto px-6 py-24 lg:px-8">
+        <form onSubmit={handleSubmit} noValidate className="grid gap-12 lg:grid-cols-[1fr_380px]">
+          <div className="flex flex-col gap-16">
             {/* Step 1: Service */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="flex items-center gap-3 font-heading text-xl font-semibold text-text-primary">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white font-body">
-                  1
-                </span>
+            <div>
+              <h2 className="flex items-center gap-3 text-xl font-bold text-purple-950 heading-font">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-white">1</span>
                 Choose a Service
               </h2>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -405,55 +335,37 @@ function BookPageContent() {
                     <button
                       key={svc.id}
                       type="button"
-                      onClick={() => {
-                        setServiceId(svc.id);
-                        setVariantIdx(0);
-                      }}
-                      className={`cursor-pointer flex items-center gap-3 rounded-xl border p-4 text-left transition-all duration-200
-                        ${
-                          active
-                            ? "border-primary bg-primary-light/30 shadow-md"
-                            : "border-border bg-warm-white hover:border-primary/40 hover:shadow-sm"
+                      onClick={() => { setServiceId(svc.id); setVariantIdx(0); }}
+                      className={`cursor-pointer flex items-center gap-4 rounded-2xl border p-6 text-left transition-all duration-200
+                        ${active
+                          ? "border-gold-400 bg-gold-50 shadow-sm"
+                          : "border-gray-200 bg-white hover:border-purple-200 hover:shadow-sm"
                         }
                       `}
                     >
-                      <div
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
-                          active ? "bg-primary text-white" : "bg-cream text-primary"
-                        }`}
-                      >
+                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${active ? "bg-gold-500 text-white" : "bg-purple-50 text-purple-600"}`}>
                         <Icon size={20} />
                       </div>
-                      <span className="font-body text-sm font-medium text-text-primary">
-                        {svc.label}
-                      </span>
+                      <span className="text-sm font-medium text-purple-950">{svc.label}</span>
                     </button>
                   );
                 })}
               </div>
-              {formErrors.service && (
-                <p className="mt-2 font-body text-xs text-red-500">
-                  {formErrors.service}
-                </p>
-              )}
+              {formErrors.service && <p className="mt-2 text-xs text-rose-500">{formErrors.service}</p>}
 
-              {/* Variant selector */}
               {selectedService && selectedService.variants.length > 1 && (
                 <div className="mt-4">
-                  <label className="font-body text-sm font-medium text-text-secondary">
-                    Session type
-                  </label>
+                  <label className="text-sm font-medium text-purple-700">Session type</label>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {selectedService.variants.map((v, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => setVariantIdx(idx)}
-                        className={`cursor-pointer rounded-full border px-5 py-2 font-body text-sm transition-all duration-200
-                          ${
-                            variantIdx === idx
-                              ? "border-primary bg-primary text-white"
-                              : "border-border bg-warm-white text-text-secondary hover:border-primary/40"
+                        className={`cursor-pointer rounded-full border px-6 py-3 text-sm transition-all duration-200
+                          ${variantIdx === idx
+                            ? "border-gold-400 bg-gold-500 text-white"
+                            : "border-gray-200 bg-white text-purple-700 hover:border-purple-200"
                           }
                         `}
                       >
@@ -463,47 +375,31 @@ function BookPageContent() {
                   </div>
                 </div>
               )}
-            </motion.div>
+            </div>
 
             {/* Step 2: Date & Time */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <h2 className="flex items-center gap-3 font-heading text-xl font-semibold text-text-primary">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white font-body">
-                  2
-                </span>
+            <div>
+              <h2 className="flex items-center gap-3 text-xl font-bold text-purple-950 heading-font">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-white">2</span>
                 Pick a Date & Time
               </h2>
               <div className="mt-5 grid gap-6 md:grid-cols-2">
                 <div>
-                  <Calendar
-                    selected={selectedDate}
-                    onSelect={setSelectedDate}
-                  />
-                  {formErrors.date && (
-                    <p className="mt-2 font-body text-xs text-red-500">
-                      {formErrors.date}
-                    </p>
-                  )}
+                  <Calendar selected={selectedDate} onSelect={setSelectedDate} />
+                  {formErrors.date && <p className="mt-2 text-xs text-rose-500">{formErrors.date}</p>}
                 </div>
                 <div>
-                  <p className="mb-3 font-body text-sm font-medium text-text-secondary">
-                    Available time slots
-                  </p>
+                  <p className="mb-3 text-sm font-medium text-purple-700">Available times</p>
                   <div className="grid grid-cols-2 gap-2">
                     {timeSlots.map((slot) => (
                       <button
                         key={slot}
                         type="button"
                         onClick={() => setSelectedTime(slot)}
-                        className={`cursor-pointer flex items-center justify-center gap-2 rounded-xl border px-4 py-3 font-body text-sm transition-all duration-200
-                          ${
-                            selectedTime === slot
-                              ? "border-primary bg-primary text-white shadow-md"
-                              : "border-border bg-warm-white text-text-secondary hover:border-primary/40 hover:shadow-sm"
+                        className={`cursor-pointer flex items-center justify-center gap-2 rounded-xl border px-5 py-4 text-sm transition-all duration-200
+                          ${selectedTime === slot
+                            ? "border-gold-400 bg-gold-500 text-white shadow-md"
+                            : "border-gray-200 bg-white text-purple-700 hover:border-purple-200"
                           }
                         `}
                       >
@@ -512,222 +408,112 @@ function BookPageContent() {
                       </button>
                     ))}
                   </div>
-                  {formErrors.time && (
-                    <p className="mt-2 font-body text-xs text-red-500">
-                      {formErrors.time}
-                    </p>
-                  )}
+                  {formErrors.time && <p className="mt-2 text-xs text-rose-500">{formErrors.time}</p>}
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Step 3: Your details */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h2 className="flex items-center gap-3 font-heading text-xl font-semibold text-text-primary">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white font-body">
-                  3
-                </span>
+            {/* Step 3: Details */}
+            <div>
+              <h2 className="flex items-center gap-3 text-xl font-bold text-purple-950 heading-font">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-white">3</span>
                 Your Details
               </h2>
               <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                {/* Name */}
-                <div className="sm:col-span-2 md:col-span-1">
-                  <label
-                    htmlFor="book-name"
-                    className="flex items-center gap-2 font-body text-sm font-medium text-text-secondary"
-                  >
-                    <User size={14} className="text-primary" />
-                    Full Name
+                <div>
+                  <label htmlFor="book-name" className="flex items-center gap-2 text-sm font-medium text-purple-700">
+                    <User size={14} className="text-purple-400" /> Full Name
                   </label>
-                  <input
-                    id="book-name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="mt-1.5 w-full rounded-xl border border-border bg-warm-white px-4 py-3 font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="Your full name"
-                  />
-                  {formErrors.name && (
-                    <p className="mt-1 font-body text-xs text-red-500">
-                      {formErrors.name}
-                    </p>
-                  )}
+                  <input id="book-name" type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} placeholder="Your full name" />
+                  {formErrors.name && <p className="mt-1 text-xs text-rose-500">{formErrors.name}</p>}
                 </div>
-
-                {/* Email */}
-                <div className="sm:col-span-2 md:col-span-1">
-                  <label
-                    htmlFor="book-email"
-                    className="flex items-center gap-2 font-body text-sm font-medium text-text-secondary"
-                  >
-                    <Mail size={14} className="text-primary" />
-                    Email
+                <div>
+                  <label htmlFor="book-email" className="flex items-center gap-2 text-sm font-medium text-purple-700">
+                    <Mail size={14} className="text-purple-400" /> Email
                   </label>
-                  <input
-                    id="book-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1.5 w-full rounded-xl border border-border bg-warm-white px-4 py-3 font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="you@email.com"
-                  />
-                  {formErrors.email && (
-                    <p className="mt-1 font-body text-xs text-red-500">
-                      {formErrors.email}
-                    </p>
-                  )}
+                  <input id="book-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="you@email.com" />
+                  {formErrors.email && <p className="mt-1 text-xs text-rose-500">{formErrors.email}</p>}
                 </div>
-
-                {/* Phone */}
-                <div className="sm:col-span-2 md:col-span-1">
-                  <label
-                    htmlFor="book-phone"
-                    className="flex items-center gap-2 font-body text-sm font-medium text-text-secondary"
-                  >
-                    <Phone size={14} className="text-primary" />
-                    Phone
+                <div>
+                  <label htmlFor="book-phone" className="flex items-center gap-2 text-sm font-medium text-purple-700">
+                    <Phone size={14} className="text-purple-400" /> Phone
                   </label>
-                  <input
-                    id="book-phone"
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="mt-1.5 w-full rounded-xl border border-border bg-warm-white px-4 py-3 font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="+358 40 123 4567"
-                  />
-                  {formErrors.phone && (
-                    <p className="mt-1 font-body text-xs text-red-500">
-                      {formErrors.phone}
-                    </p>
-                  )}
+                  <input id="book-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+358 40 123 4567" />
+                  {formErrors.phone && <p className="mt-1 text-xs text-rose-500">{formErrors.phone}</p>}
                 </div>
-
-                {/* Notes */}
                 <div className="sm:col-span-2">
-                  <label
-                    htmlFor="book-notes"
-                    className="flex items-center gap-2 font-body text-sm font-medium text-text-secondary"
-                  >
-                    <FileText size={14} className="text-primary" />
-                    Special Notes or Requests
+                  <label htmlFor="book-notes" className="flex items-center gap-2 text-sm font-medium text-purple-700">
+                    <FileText size={14} className="text-purple-400" /> Notes (optional)
                   </label>
-                  <textarea
-                    id="book-notes"
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    rows={4}
-                    className="mt-1.5 w-full resize-none rounded-xl border border-border bg-warm-white px-4 py-3 font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="Anything Julia should know before your session..."
-                  />
+                  <textarea id="book-notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="Anything Julia should know..." />
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Submit (mobile) */}
+            {/* Submit mobile */}
             <div className="lg:hidden">
-              <button
-                type="submit"
-                className="w-full cursor-pointer rounded-full bg-primary px-8 py-4 font-body text-base font-medium text-white transition-all duration-200 hover:bg-primary-dark hover:shadow-lg"
-              >
+              <button type="submit" className="w-full cursor-pointer rounded-full bg-gold-500 px-10 py-4 text-base font-medium text-white hover:bg-gold-400 transition-all">
                 Confirm Booking
               </button>
             </div>
           </div>
 
-          {/* Right column: Summary panel */}
-          <motion.aside
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="hidden lg:block"
-          >
-            <div className="sticky top-28 rounded-3xl border border-border bg-cream/60 p-8 shadow-sm">
-              <h3 className="font-heading text-xl font-semibold text-text-primary">
-                Booking Summary
-              </h3>
+          {/* Summary sidebar */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-28 rounded-2xl bg-white p-8 shadow-lg border border-gray-100">
+              <h3 className="text-xl font-bold text-purple-950 heading-font">Summary</h3>
 
               <div className="mt-6 flex flex-col gap-4">
-                {/* Service */}
                 <div className="flex items-start gap-3">
-                  <CalendarDays size={18} className="mt-0.5 shrink-0 text-primary" />
+                  <CalendarDays size={18} className="mt-0.5 shrink-0 text-gold-500" />
                   <div>
-                    <p className="font-body text-xs font-medium uppercase tracking-wider text-text-muted">
-                      Service
-                    </p>
-                    <p className="font-body text-sm text-text-primary">
-                      {selectedService
-                        ? `${selectedService.label}${
-                            selectedVariant
-                              ? ` (${selectedVariant.label})`
-                              : ""
-                          }`
-                        : "Not selected"}
+                    <p className="text-xs font-medium uppercase tracking-wider text-purple-400">Service</p>
+                    <p className="text-sm text-purple-950">
+                      {selectedService ? `${selectedService.label}${selectedVariant ? ` (${selectedVariant.label})` : ""}` : "Not selected"}
                     </p>
                   </div>
                 </div>
-
-                {/* Date */}
                 <div className="flex items-start gap-3">
-                  <CalendarDays size={18} className="mt-0.5 shrink-0 text-primary" />
+                  <CalendarDays size={18} className="mt-0.5 shrink-0 text-gold-500" />
                   <div>
-                    <p className="font-body text-xs font-medium uppercase tracking-wider text-text-muted">
-                      Date
-                    </p>
-                    <p className="font-body text-sm text-text-primary">
-                      {selectedDate
-                        ? format(selectedDate, "EEEE, MMMM d, yyyy")
-                        : "Not selected"}
+                    <p className="text-xs font-medium uppercase tracking-wider text-purple-400">Date</p>
+                    <p className="text-sm text-purple-950">
+                      {selectedDate ? format(selectedDate, "EEEE, MMMM d, yyyy") : "Not selected"}
                     </p>
                   </div>
                 </div>
-
-                {/* Time */}
                 <div className="flex items-start gap-3">
-                  <Clock size={18} className="mt-0.5 shrink-0 text-primary" />
+                  <Clock size={18} className="mt-0.5 shrink-0 text-gold-500" />
                   <div>
-                    <p className="font-body text-xs font-medium uppercase tracking-wider text-text-muted">
-                      Time
-                    </p>
-                    <p className="font-body text-sm text-text-primary">
-                      {selectedTime || "Not selected"}
-                    </p>
+                    <p className="text-xs font-medium uppercase tracking-wider text-purple-400">Time</p>
+                    <p className="text-sm text-purple-950">{selectedTime || "Not selected"}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="my-6 h-px bg-border" />
+              <div className="section-divider my-6" />
 
-              {/* Price */}
               <div className="flex items-baseline justify-between">
-                <span className="font-body text-sm text-text-secondary">
-                  Total
-                </span>
-                <span className="font-heading text-3xl font-semibold text-text-primary">
-                  {selectedVariant ? `€${selectedVariant.price}` : "---"}
+                <span className="text-sm text-purple-600">Total</span>
+                <span className="text-3xl font-bold text-purple-950 heading-font">
+                  {selectedVariant ? `\u20AC${selectedVariant.price}` : "---"}
                 </span>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
-                className="mt-8 w-full cursor-pointer rounded-full bg-primary px-8 py-4 font-body text-sm font-medium text-white transition-all duration-200 hover:bg-primary-dark hover:shadow-lg"
+                className="mt-8 w-full cursor-pointer rounded-full bg-gold-500 px-10 py-4 text-sm font-medium text-white hover:bg-gold-400 transition-all"
               >
                 Confirm Booking
               </button>
             </div>
-          </motion.aside>
+          </aside>
         </form>
       </section>
 
-      {/* Success modal */}
       <AnimatePresence>
         {showSuccess && <SuccessModal onClose={resetForm} />}
       </AnimatePresence>
-    </div>
+    </>
   );
 }

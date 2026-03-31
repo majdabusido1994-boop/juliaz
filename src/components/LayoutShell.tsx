@@ -15,13 +15,13 @@ export default function LayoutShell({
   const isAdmin = pathname.startsWith("/admin");
 
   if (isAdmin) {
-    return <main className="flex-1">{children}</main>;
+    return <main>{children}</main>;
   }
 
   return (
     <>
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main className="page-transition">{children}</main>
       <Footer />
       <WhatsAppButton />
       <MusicPlayer />

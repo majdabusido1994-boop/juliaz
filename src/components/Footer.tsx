@@ -1,22 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Mail, Phone, Send, Heart } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
-function InstagramIcon({ size = 16, className = "" }: { size?: number; className?: string }) {
+function InstagramIcon({ className = "" }: { className?: string }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
+    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -24,58 +13,42 @@ function InstagramIcon({ size = 16, className = "" }: { size?: number; className
   );
 }
 
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Spirit Game", href: "/spirit-game" },
-  { label: "Book Now", href: "/book" },
-  { label: "Contact", href: "/contact" },
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Offerings" },
+  { href: "/book", label: "Book Now" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail("");
-    }
-  };
-
   return (
-    <footer className="border-t border-border bg-cream">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-purple-950 text-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="cursor-pointer">
-              <h3 className="font-heading text-2xl italic font-semibold text-text-primary">
-                Julia Josefiina
-              </h3>
-            </Link>
-            <p className="mt-3 font-body text-sm italic text-text-secondary leading-relaxed">
-              &ldquo;when you move, everything moves&rdquo;
-            </p>
-            <p className="mt-4 font-body text-sm text-text-muted leading-relaxed">
-              Holistic wellness journeys for body, mind, and spirit. Guiding
-              you toward balance and inner harmony.
+          <div>
+            <h3 className="text-2xl font-semibold heading-font">
+              Julia <span className="text-gradient-gold">Josefiina</span>
+            </h3>
+            <p className="text-purple-300 text-sm leading-relaxed max-w-xs mt-4">
+              Yoga teacher, somatic movement facilitator, and Reiki Master.
+              Supporting nervous system regulation, awareness, and a deeper
+              connection to your body.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading text-lg font-semibold text-text-primary">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-gold-400 mb-4">
               Quick Links
             </h4>
-            <ul className="mt-4 flex flex-col gap-2.5">
-              {quickLinks.map((link) => (
+            <ul className="space-y-3">
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="cursor-pointer font-body text-sm text-text-secondary transition-colors duration-200 hover:text-primary-dark"
+                    className="text-purple-300 text-sm hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     {link.label}
                   </Link>
@@ -84,18 +57,18 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Connect */}
           <div>
-            <h4 className="font-heading text-lg font-semibold text-text-primary">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-gold-400 mb-4">
               Get in Touch
             </h4>
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="space-y-3">
               <li>
                 <a
                   href="mailto:julia.taivalmaki@gmail.com"
-                  className="flex cursor-pointer items-center gap-2.5 font-body text-sm text-text-secondary transition-colors duration-200 hover:text-primary-dark"
+                  className="flex items-center gap-3 text-purple-300 text-sm hover:text-white transition-colors duration-300"
                 >
-                  <Mail size={16} className="shrink-0 text-primary" />
+                  <Mail size={16} />
                   julia.taivalmaki@gmail.com
                 </a>
               </li>
@@ -104,9 +77,9 @@ export default function Footer() {
                   href="https://wa.me/358405596735"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex cursor-pointer items-center gap-2.5 font-body text-sm text-text-secondary transition-colors duration-200 hover:text-primary-dark"
+                  className="flex items-center gap-3 text-purple-300 text-sm hover:text-white transition-colors duration-300"
                 >
-                  <Phone size={16} className="shrink-0 text-primary" />
+                  <Phone size={16} />
                   +358 40 559 6735
                 </a>
               </li>
@@ -115,55 +88,19 @@ export default function Footer() {
                   href="https://instagram.com/juliamooves"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex cursor-pointer items-center gap-2.5 font-body text-sm text-text-secondary transition-colors duration-200 hover:text-primary-dark"
+                  className="flex items-center gap-3 text-purple-300 text-sm hover:text-white transition-colors duration-300"
                 >
-                  <InstagramIcon size={16} className="shrink-0 text-primary" />
+                  <InstagramIcon />
                   @juliamooves
                 </a>
               </li>
             </ul>
           </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="font-heading text-lg font-semibold text-text-primary">
-              Stay Connected
-            </h4>
-            <p className="mt-4 font-body text-sm text-text-secondary leading-relaxed">
-              Subscribe for wellness tips, upcoming events, and soulful
-              inspiration.
-            </p>
-            {subscribed ? (
-              <p className="mt-4 font-body text-sm font-medium text-sage">
-                Thank you for subscribing!
-              </p>
-            ) : (
-              <form onSubmit={handleSubscribe} className="mt-4 flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  required
-                  className="min-w-0 flex-1 rounded-lg border border-border bg-warm-white px-4 py-2.5 font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-                <button
-                  type="submit"
-                  className="cursor-pointer rounded-lg bg-primary px-4 py-2.5 text-white transition-all duration-200 hover:bg-primary-dark hover:shadow-md"
-                  aria-label="Subscribe"
-                >
-                  <Send size={16} />
-                </button>
-              </form>
-            )}
-          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 border-t border-border pt-8">
-          <p className="flex items-center justify-center gap-1.5 font-body text-sm text-text-muted">
-            &copy; 2024 Julia Josefiina Taivalm&auml;ki. Made with
-            <Heart size={14} className="text-primary" fill="currentColor" />
+        <div className="mt-16 pt-8 border-t border-purple-800 text-center">
+          <p className="text-purple-400 text-sm">
+            &copy; {new Date().getFullYear()} Julia Josefiina Taivalm&auml;ki. All rights reserved.
           </p>
         </div>
       </div>

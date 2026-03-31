@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Julia Josefiina Taivalmäki — Movement, Presence & Energy",
@@ -33,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full", "font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col font-body text-text-primary bg-background antialiased">
+    <html lang="en">
+      <body className="antialiased bg-white text-purple-950" style={{ fontFamily: "var(--font-body)" }}>
         <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
