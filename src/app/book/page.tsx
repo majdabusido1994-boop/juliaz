@@ -17,6 +17,7 @@ import {
   Activity,
   Mountain,
   X,
+  MessageCircle,
 } from "lucide-react";
 import {
   format,
@@ -57,6 +58,7 @@ const serviceOptions = [
     id: "classes",
     label: "Class (Drop-in / Card)",
     icon: Mountain,
+    payOnSite: true,
     variants: [
       { label: "Drop-in", price: 18 },
       { label: "10-class card", price: 150 },
@@ -161,7 +163,17 @@ function Calendar({
   );
 }
 
-function SuccessModal({ onClose }: { onClose: () => void }) {
+function SuccessModal({
+  onClose,
+  waUrl,
+  onSendEmail,
+  emailState,
+}: {
+  onClose: () => void;
+  waUrl: string;
+  onSendEmail: () => void;
+  emailState: "idle" | "sending" | "sent" | "error";
+}) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -188,17 +200,47 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
           <Check size={32} className="text-green-600" />
         </div>
         <h2 className="mt-6 text-2xl font-bold text-purple-950 heading-font">
-          Booking Confirmed
+          One Last Step
         </h2>
         <p className="mt-3 text-sm text-purple-700 leading-relaxed">
-          Thank you for booking with Julia. You will receive a confirmation shortly.
+          Choose how you&apos;d like to send your booking to Julia — tap a
+          button below, then press send.
         </p>
+        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 cursor-pointer rounded-full bg-[#25D366] px-6 py-3 text-sm font-medium text-white hover:bg-[#20b858] transition-all"
+          >
+            <MessageCircle size={18} fill="white" />
+            WhatsApp
+          </a>
+          <button
+            type="button"
+            onClick={onSendEmail}
+            disabled={emailState === "sending" || emailState === "sent"}
+            className="inline-flex items-center justify-center gap-2 cursor-pointer rounded-full bg-purple-600 px-6 py-3 text-sm font-medium text-white hover:bg-purple-500 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            <Mail size={18} />
+            {emailState === "idle" && "Send Email"}
+            {emailState === "sending" && "Sending..."}
+            {emailState === "sent" && "Sent \u2713"}
+            {emailState === "error" && "Retry"}
+          </button>
+        </div>
+        {emailState === "sent" && (
+          <p className="mt-4 text-xs text-green-600">Email delivered to Julia.</p>
+        )}
+        {emailState === "error" && (
+          <p className="mt-4 text-xs text-rose-500">Could not send email. Please try WhatsApp instead.</p>
+        )}
         <button
           type="button"
           onClick={onClose}
-          className="mt-8 cursor-pointer rounded-full bg-gold-500 px-8 py-3 text-sm font-medium text-white hover:bg-gold-400 transition-all"
+          className="mt-3 block w-full cursor-pointer text-xs text-purple-400 hover:text-purple-600 transition-colors"
         >
-          Done
+          Close
         </button>
       </motion.div>
     </motion.div>
@@ -225,6 +267,8 @@ function BookPageContent() {
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [waUrl, setWaUrl] = useState("");
+  const [emailState, setEmailState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -271,7 +315,54 @@ function BookPageContent() {
     const existing = JSON.parse(localStorage.getItem("juliaBookings") || "[]");
     existing.push(booking);
     localStorage.setItem("juliaBookings", JSON.stringify(existing));
+
+    // Send booking details to Julia's WhatsApp
+    const priceLine = selectedService!.payOnSite
+      ? `*Payment:* Pay at studio\n`
+      : `*Price:* \u20AC${booking.price}\n`;
+    const message =
+      `*New Booking Request*\n\n` +
+      `*Service:* ${booking.service} (${booking.variant})\n` +
+      priceLine +
+      `*Date:* ${format(selectedDate!, "EEEE, MMMM d, yyyy")}\n` +
+      `*Time:* ${booking.time}\n\n` +
+      `*Name:* ${booking.name}\n` +
+      `*Email:* ${booking.email}\n` +
+      `*Phone:* ${booking.phone}` +
+      (booking.notes ? `\n\n*Notes:* ${booking.notes}` : "");
+
+    const url = `https://api.whatsapp.com/send?phone=358405596735&text=${encodeURIComponent(message)}`;
+    setWaUrl(url);
+    setEmailState("idle");
     setShowSuccess(true);
+  };
+
+  const sendEmail = async () => {
+    if (!selectedService || !selectedVariant || !selectedDate) return;
+    setEmailState("sending");
+    const body = new URLSearchParams({
+      "form-name": "booking",
+      "bot-field": "",
+      service: selectedService.label,
+      variant: selectedVariant.label,
+      price: selectedService.payOnSite ? "Pay at studio" : `\u20AC${selectedVariant.price}`,
+      date: format(selectedDate, "EEEE, MMMM d, yyyy"),
+      time: selectedTime,
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      notes: notes.trim(),
+    });
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      setEmailState(res.ok ? "sent" : "error");
+    } catch {
+      setEmailState("error");
+    }
   };
 
   const resetForm = () => {
@@ -369,7 +460,7 @@ function BookPageContent() {
                           }
                         `}
                       >
-                        {v.label} &mdash; &euro;{v.price}
+                        {v.label}{!selectedService.payOnSite && <> &mdash; &euro;{v.price}</>}
                       </button>
                     ))}
                   </div>
@@ -445,7 +536,7 @@ function BookPageContent() {
                   <label htmlFor="book-notes" className="flex items-center gap-2 text-sm font-medium text-purple-700">
                     <FileText size={14} className="text-purple-400" /> Notes (optional)
                   </label>
-                  <textarea id="book-notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="Anything Julia should know..." />
+                  <textarea id="book-notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="Anything I should know beforehand..." />
                 </div>
               </div>
             </div>
@@ -495,9 +586,15 @@ function BookPageContent() {
 
               <div className="flex items-baseline justify-between">
                 <span className="text-sm text-purple-600">Total</span>
-                <span className="text-3xl font-bold text-purple-950 heading-font">
-                  {selectedVariant ? `\u20AC${selectedVariant.price}` : "---"}
-                </span>
+                {selectedService?.payOnSite ? (
+                  <span className="text-sm font-medium text-purple-700 heading-font">
+                    Pay at studio
+                  </span>
+                ) : (
+                  <span className="text-3xl font-bold text-purple-950 heading-font">
+                    {selectedVariant ? `\u20AC${selectedVariant.price}` : "---"}
+                  </span>
+                )}
               </div>
 
               <button
@@ -512,7 +609,14 @@ function BookPageContent() {
       </section>
 
       <AnimatePresence>
-        {showSuccess && <SuccessModal onClose={resetForm} />}
+        {showSuccess && (
+          <SuccessModal
+            onClose={resetForm}
+            waUrl={waUrl}
+            onSendEmail={sendEmail}
+            emailState={emailState}
+          />
+        )}
       </AnimatePresence>
     </>
   );

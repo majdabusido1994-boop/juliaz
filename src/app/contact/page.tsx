@@ -38,7 +38,7 @@ function SuccessToast({ onClose }: { onClose: () => void }) {
       </div>
       <div>
         <p className="text-sm font-medium text-purple-950">Message Sent</p>
-        <p className="text-xs text-purple-600">Julia will get back to you soon!</p>
+        <p className="text-xs text-purple-600">I&apos;ll get back to you soon!</p>
       </div>
       <button
         type="button"
@@ -64,7 +64,7 @@ const contactMethods = [
     icon: Phone,
     label: "WhatsApp",
     value: "+358 40 559 6735",
-    href: "https://wa.me/358405596735",
+    href: "https://api.whatsapp.com/send?phone=358405596735",
     color: "bg-green-50 text-green-600",
   },
   {

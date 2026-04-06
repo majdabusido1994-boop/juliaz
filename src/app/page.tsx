@@ -76,11 +76,17 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <p className="text-gold-400 text-sm font-medium uppercase tracking-[0.3em] mb-6">
-              Movement &middot; Presence &middot; Energy
-            </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight heading-font">
-              Julia <span className="text-gradient-gold">Josefiina</span>
+            <Image
+              src="/img/logo.jpeg"
+              alt="Julia Josefiina logo"
+              width={120}
+              height={120}
+              className="mx-auto mb-6 rounded-full bg-transparent mix-blend-screen"
+              priority
+            />
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight heading-font">
+              When you move,{" "}
+              <span className="text-gradient-gold">everything moves</span>
             </h1>
           </motion.div>
 
@@ -88,11 +94,9 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed mt-6"
+            className="text-base md:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed mt-6"
           >
-            Yoga teacher, somatic movement facilitator, and Reiki Master &mdash;
-            supporting nervous system regulation, awareness, and a deeper
-            connection to your body.
+            Somatic movement &amp; yoga. Reiki. Intuitive massage.
           </motion.p>
 
           <motion.div
@@ -119,7 +123,7 @@ export default function HomePage() {
 
       {/* ── INTRO ── */}
       <section className="py-24 lg:py-32 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,12 +131,18 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-purple-950 heading-font mb-6">
-              When you move, everything moves
+              Hi, I&rsquo;m glad you are here.
             </h2>
-            <p className="text-purple-700 text-lg leading-relaxed max-w-3xl mx-auto">
-              Here, you&rsquo;ll find practices, spaces, and offerings designed to help
-              you slow down, listen, and reconnect &mdash; at your own pace, in your
-              own way.
+            <p className="text-purple-600 text-sm leading-relaxed max-w-2xl mx-auto">
+              I&rsquo;m Julia Josefiina &ndash; a yoga teacher, somatic movement
+              facilitator, and Reiki Master working at the intersection of movement,
+              presence, and energy. Here, you&rsquo;ll find practices, spaces, and
+              offerings to help you arrive, listen, and reconnect back to you &mdash;
+              at your own pace, in your own way.
+            </p>
+            <p className="text-purple-600 text-sm leading-relaxed max-w-2xl mx-auto mt-4">
+              If you have any questions, curiosities, or feel called to connect,
+              you&rsquo;re always welcome to reach out. I&rsquo;d love to hear from you.
             </p>
           </motion.div>
         </div>
@@ -195,89 +205,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── QUOTE ── */}
-      <section className="py-24 lg:py-32 px-6 bg-purple-950 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/4 w-80 h-80 rounded-full bg-purple-500/8 blur-3xl" />
-          <div className="absolute bottom-1/3 right-1/4 w-64 h-64 rounded-full bg-gold-500/6 blur-3xl" />
-        </div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-          className="relative max-w-3xl mx-auto text-center"
-        >
-          <div className="text-purple-400/20 text-7xl leading-none mb-4 heading-font">&ldquo;</div>
-          <p className="text-2xl md:text-3xl text-white/90 leading-relaxed italic heading-font -mt-10">
-            Practices rooted in listening &mdash; to the body, to the breath,
-            to the subtle layers of experience.
-          </p>
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-gold-500 flex items-center justify-center text-white font-bold text-sm">J</div>
-            <div className="text-left">
-              <p className="text-white text-sm font-medium">Julia Josefiina</p>
-              <p className="text-purple-400/60 text-xs">Yoga & Somatic Movement</p>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ── ABOUT PREVIEW ── */}
-      <section className="py-24 lg:py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-xl">
-                <Image
-                  src="/img/julia-portrait-1.jpg"
-                  alt="Julia in yoga pose on sand dunes"
-                  width={600}
-                  height={800}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-purple-950 heading-font">
-                About Julia
-              </h2>
-              <p className="text-purple-700 text-base leading-relaxed">
-                Julia is an E-RYT 500 yoga teacher, somatic movement facilitator,
-                and Reiki Master with a Master&rsquo;s degree in Social Services.
-                With over 800 hours of movement and yoga studies, she works at the
-                intersection of movement, presence, and energy.
-              </p>
-              <p className="text-purple-700 text-base leading-relaxed">
-                I believe the body is not something that needs fixing &mdash; it is
-                something to meet, listen to, and work with.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-gold-500 hover:text-gold-600 transition-colors cursor-pointer"
-              >
-                Read more about Julia
-                <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-        <div className="section-divider max-w-md mx-auto mt-16" />
-      </section>
-
-      {/* ── INSTAGRAM CTA ── */}
+      {/* ── INSTAGRAM / STAY CONNECTED ── */}
       <section className="py-24 lg:py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -286,12 +214,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-purple-950 heading-font mb-4">
-              Follow the Journey
+            <h2 className="text-3xl md:text-4xl font-bold text-purple-950 heading-font mb-8">
+              Stay Connected
             </h2>
-            <p className="text-purple-700 text-lg max-w-2xl mx-auto mb-8">
-              Join the community on Instagram for movement inspiration, behind-the-scenes, and soulful reflections.
-            </p>
             <a
               href="https://instagram.com/juliamooves"
               target="_blank"
@@ -303,7 +228,6 @@ export default function HomePage() {
             </a>
           </motion.div>
 
-          {/* Instagram preview grid */}
           <div className="mt-12 grid grid-cols-3 md:grid-cols-6 gap-3">
             {[
               "/img/julia-portrait-5.jpg",

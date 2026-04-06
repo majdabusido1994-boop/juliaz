@@ -10,7 +10,7 @@ const services = [
     id: "intuitive-massage-reiki",
     title: "Intuitive Massage & Reiki",
     description:
-      "This session weaves together intuitive bodywork and Reiki energy healing into one deeply restorative experience. Julia listens to your body through her hands, combining massage techniques with the channeling of universal life energy to release tension, clear energetic blockages, and restore your natural state of balance.",
+      "This session weaves together intuitive bodywork and Reiki energy healing into one deeply restorative experience. I listen to your body through my hands, combining massage techniques with the channeling of universal life energy to release tension, clear energetic blockages, and restore your natural state of balance.",
     image: "/img/reiki-massage.jpg",
     benefits: [
       "Deep relaxation and tension release",
@@ -28,7 +28,7 @@ const services = [
     id: "reiki",
     title: "Reiki",
     description:
-      "Reiki is the channeling of universal life energy \u2014 a gentle yet profound healing practice rooted in ancient Japanese tradition. During a session, Julia places her hands gently on or near your body, allowing energy to flow where it is most needed. This deeply restorative practice works on physical, emotional, mental, and spiritual levels.",
+      "Reiki is the channeling of universal life energy \u2014 a gentle yet profound healing practice rooted in ancient Japanese tradition. During a session, I place my hands gently on or near your body, allowing energy to flow where it is most needed. This deeply restorative practice works on physical, emotional, mental, and spiritual levels.",
     image: "/img/studio-2.jpg",
     benefits: [
       "Stress reduction and improved sleep",

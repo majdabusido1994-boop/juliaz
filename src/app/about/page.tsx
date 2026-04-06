@@ -20,24 +20,17 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold text-white heading-font"
+            style={{ color: "#c4a882" }}
           >
-            About Julia
+            About Me
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-purple-300 text-lg max-w-2xl mx-auto mt-4"
-          >
-            When you move, everything moves
-          </motion.p>
         </div>
       </section>
 
       {/* Story */}
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -46,8 +39,8 @@ export default function AboutPage() {
             >
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/img/julia-portrait-3.jpg"
-                  alt="Julia on the beach"
+                  src="/img/about-page.jpeg"
+                  alt="Julia Josefiina"
                   width={600}
                   height={800}
                   className="w-full h-auto object-cover"
@@ -56,19 +49,28 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            <div className="space-y-6">
-              <motion.p
+            <div className="space-y-5">
+              <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
+                className="text-3xl md:text-4xl font-bold heading-font"
+                style={{ color: "#c4a882" }}
+              >
+                Hi there. I am Julia Josefiina.
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.05 }}
                 className="text-purple-700 text-base leading-relaxed"
               >
-                I&rsquo;m Julia Josefiina &ndash; a yoga teacher, somatic movement
-                facilitator, and Reiki Master working at the intersection of movement,
-                presence, and energy. My work brings these elements together to support
-                nervous system regulation, awareness, and a deeper connection to your body.
+                I work at the intersection of movement, presence, and energy.
               </motion.p>
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -76,9 +78,25 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-purple-700 text-base leading-relaxed"
               >
-                Here, you&rsquo;ll find practices, spaces, and offerings designed to help
-                you slow down, listen, and reconnect &mdash; at your own pace, in your own way.
+                I&rsquo;m an ERYT-500 yoga teacher, somatic movement facilitator, and
+                Reiki Master. My work is rooted in trauma-informed approaches to the
+                body&ndash;mind connection, where safety, awareness, and curiosity are
+                at the center.
               </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="text-purple-700 text-base leading-relaxed"
+              >
+                My path into this work began through listening. Listening to people, to
+                stories, and to nervous systems under pressure. This experience continues
+                to shape how I approach the body: not as something to fix, but as
+                something to meet.
+              </motion.p>
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -86,14 +104,54 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-purple-700 text-base leading-relaxed"
               >
-                If you have any questions, curiosities, or feel called to connect,
-                you&rsquo;re always welcome to reach out. I&rsquo;d love to hear from you.
+                Before stepping into this field, I completed a Master&rsquo;s degree in
+                Social Services and worked in humanitarian and refugee support. Supporting
+                people through complex life situations changed how I understand the
+                body&mdash;less as something to fix, and more as something to listen to
+                and work with.
               </motion.p>
-              <motion.div
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="text-purple-700 text-base leading-relaxed"
+              >
+                My path into this work has been shaped both through formal training and
+                lived experience. I have completed over 800 hours of studies in yoga and
+                movement, including Embodied Yin, Shake the Dust, and Authentic Flow
+                (200h + 300h), alongside studies in Body-Mind Centering and massage
+                techniques.
+              </motion.p>
+
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-purple-700 text-base leading-relaxed"
+              >
+                Today, my work brings together movement, nervous system awareness, and
+                energy work to support a sense of safety, connection, and inner stability.
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="text-purple-700 text-base leading-relaxed"
+              >
+                My intention is to create spaces where you can reconnect with your body,
+                at your own pace, in your own way.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
                 <Link
                   href="/contact"
@@ -108,62 +166,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Philosophy — dark section */}
-      <section className="py-24 lg:py-32 px-6 bg-purple-950 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-purple-400 rounded-full blur-3xl" />
-        </div>
-        <div className="relative max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-center mb-16"
-          >
-            <p className="text-gold-400 text-sm font-medium uppercase tracking-wider mb-4">My Philosophy</p>
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl text-white/90 leading-relaxed italic heading-font max-w-3xl mx-auto">
-              &ldquo;The body is not something that needs fixing &mdash; it is something
-              to meet, listen to, and work with.&rdquo;
-            </blockquote>
-            <div className="mt-8 w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-purple-500 to-gold-500" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Safety",
-                text: "Creating a container where your nervous system can soften and your body can begin to trust the process.",
-              },
-              {
-                title: "Awareness",
-                text: "Cultivating a gentle, non-judgmental attention to what is present in the body, breath, and mind.",
-              },
-              {
-                title: "Curiosity",
-                text: "Approaching your experience with openness rather than fixing \u2014 meeting yourself exactly where you are.",
-              },
-            ].map((pillar, i) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <h3 className="text-xl font-bold text-gold-400 heading-font mb-3">
-                  {pillar.title}
-                </h3>
-                <p className="text-purple-300 text-sm leading-relaxed">
-                  {pillar.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-24 lg:py-32 px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -174,11 +176,10 @@ export default function AboutPage() {
             transition={{ duration: 0.7 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-purple-950 heading-font mb-4">
-              Ready to Begin Your Journey?
+              Explore Different Ways to Work with Me
             </h2>
             <p className="text-purple-700 text-lg max-w-xl mx-auto mb-8">
-              Whether you are new to movement practices or deepening an existing journey,
-              I would love to support you.
+              Classes, 1:1 sessions, and events
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
