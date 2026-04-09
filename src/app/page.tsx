@@ -76,15 +76,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <Image
-              src="/img/logo.jpeg"
-              alt="Julia Josefiina logo"
-              width={120}
-              height={120}
-              className="mx-auto mb-6 rounded-full bg-transparent mix-blend-screen"
-              priority
-            />
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight heading-font">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight heading-font">
               When you move,{" "}
               <span className="text-gradient-gold">everything moves</span>
             </h1>
@@ -96,7 +88,7 @@ export default function HomePage() {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-base md:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed mt-6"
           >
-            Somatic movement &amp; yoga. Reiki. Intuitive massage.
+            Somatic Movement. Yoga. Reiki. Intuitive touch.
           </motion.p>
 
           <motion.div

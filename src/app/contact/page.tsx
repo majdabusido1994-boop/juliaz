@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import {
   Mail,
   Phone,
@@ -58,21 +58,21 @@ const contactMethods = [
     label: "Email",
     value: "julia.taivalmaki@gmail.com",
     href: "mailto:julia.taivalmaki@gmail.com",
-    color: "bg-purple-50 text-purple-600",
+    color: "bg-purple-50 text-purple-500",
   },
   {
     icon: Phone,
     label: "WhatsApp",
     value: "+358 40 559 6735",
     href: "https://api.whatsapp.com/send?phone=358405596735",
-    color: "bg-green-50 text-green-600",
+    color: "bg-green-50 text-green-500",
   },
   {
     icon: InstagramIcon,
     label: "Instagram",
     value: "@juliamooves",
     href: "https://instagram.com/juliamooves",
-    color: "bg-pink-50 text-pink-600",
+    color: "bg-pink-50 text-pink-500",
   },
 ];
 
@@ -126,27 +126,45 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* Hero Banner */}
-      <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-purple-950 to-purple-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-gold-400 rounded-full blur-3xl" />
+      {/* Hero Banner with blurred photo */}
+      <section className="relative min-h-[50vh] flex items-center justify-center px-6 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/img/connect-hero.jpeg"
+            alt=""
+            fill
+            className="object-cover blur-[2px] brightness-[0.4]"
+            priority
+          />
         </div>
-        <div className="relative max-w-4xl mx-auto text-center">
+        <div className="absolute inset-0 bg-purple-950/30" />
+
+        {/* Wave bottom */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" className="w-full">
+            <path
+              d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H0Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+
+        <div className="relative pt-28 pb-16 max-w-4xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold text-white heading-font"
           >
-            Let&apos;s Connect
+            Connect
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-purple-300 text-lg mt-4"
+            className="text-purple-200 text-lg mt-4"
           >
-            I&apos;d love to hear from you
+            For sessions, collaborations, or questions
           </motion.p>
         </div>
       </section>
@@ -178,7 +196,7 @@ export default function ContactPage() {
                       <Icon size={20} />
                     </div>
                     <div>
-                      <p className="text-sm text-purple-500">{method.label}</p>
+                      <p className="text-sm text-purple-400">{method.label}</p>
                       <p className="font-medium text-purple-950 group-hover:text-gold-500 transition-colors">
                         {method.value}
                       </p>
@@ -186,21 +204,6 @@ export default function ContactPage() {
                   </motion.a>
                 );
               })}
-            </div>
-
-            <div className="section-divider max-w-xs mt-8" />
-
-            {/* Book CTA */}
-            <div className="mt-8">
-              <p className="text-purple-700 text-sm mb-4">
-                Ready to book? Go directly to the booking page.
-              </p>
-              <Link
-                href="/book"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gold-500 text-white font-semibold rounded-full hover:bg-gold-400 transition-all duration-300 text-sm cursor-pointer"
-              >
-                Book a Session
-              </Link>
             </div>
           </div>
 
