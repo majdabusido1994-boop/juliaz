@@ -73,6 +73,17 @@ export default function ServicesPage() {
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-1/3 w-96 h-96 bg-purple-400 rounded-full blur-3xl" />
         </div>
+
+        {/* Wave bottom */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" className="w-full">
+            <path
+              d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H0Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -80,17 +91,8 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold text-white heading-font"
           >
-            Services & Offerings
+            Offerings
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-purple-300 text-lg max-w-2xl mx-auto mt-4"
-          >
-            Each offering is an invitation to slow down, reconnect, and nurture the
-            relationship between your body, mind, and spirit.
-          </motion.p>
         </div>
       </section>
 
