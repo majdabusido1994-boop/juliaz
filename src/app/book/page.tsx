@@ -15,7 +15,6 @@ import {
   Check,
   Sparkles,
   Activity,
-  Mountain,
   X,
   MessageCircle,
 } from "lucide-react";
@@ -38,11 +37,11 @@ import {
 const serviceOptions = [
   {
     id: "intuitive-massage-reiki",
-    label: "Intuitive Massage & Reiki",
+    label: "Intuitive Touch & Reiki",
     icon: Sparkles,
     variants: [
-      { label: "60 min", price: 80 },
-      { label: "90 min", price: 110 },
+      { label: "60 min", price: 70 },
+      { label: "90 min", price: 95 },
     ],
   },
   {
@@ -50,18 +49,8 @@ const serviceOptions = [
     label: "Reiki",
     icon: Activity,
     variants: [
-      { label: "60 min", price: 70 },
-      { label: "90 min", price: 95 },
-    ],
-  },
-  {
-    id: "classes",
-    label: "Class (Drop-in / Card)",
-    icon: Mountain,
-    payOnSite: true,
-    variants: [
-      { label: "Drop-in", price: 18 },
-      { label: "10-class card", price: 150 },
+      { label: "60 min", price: 60 },
+      { label: "90 min", price: 75 },
     ],
   },
 ];
@@ -317,13 +306,10 @@ function BookPageContent() {
     localStorage.setItem("juliaBookings", JSON.stringify(existing));
 
     // Send booking details to Julia's WhatsApp
-    const priceLine = selectedService!.payOnSite
-      ? `*Payment:* Pay at studio\n`
-      : `*Price:* \u20AC${booking.price}\n`;
     const message =
       `*New Booking Request*\n\n` +
       `*Service:* ${booking.service} (${booking.variant})\n` +
-      priceLine +
+      `*Price:* \u20AC${booking.price}\n` +
       `*Date:* ${format(selectedDate!, "EEEE, MMMM d, yyyy")}\n` +
       `*Time:* ${booking.time}\n\n` +
       `*Name:* ${booking.name}\n` +
@@ -345,7 +331,7 @@ function BookPageContent() {
       "bot-field": "",
       service: selectedService.label,
       variant: selectedVariant.label,
-      price: selectedService.payOnSite ? "Pay at studio" : `\u20AC${selectedVariant.price}`,
+      price: `\u20AC${selectedVariant.price}`,
       date: format(selectedDate, "EEEE, MMMM d, yyyy"),
       time: selectedTime,
       name: name.trim(),
@@ -460,7 +446,7 @@ function BookPageContent() {
                           }
                         `}
                       >
-                        {v.label}{!selectedService.payOnSite && <> &mdash; &euro;{v.price}</>}
+                        {v.label} &mdash; &euro;{v.price}
                       </button>
                     ))}
                   </div>
@@ -586,15 +572,9 @@ function BookPageContent() {
 
               <div className="flex items-baseline justify-between">
                 <span className="text-sm text-purple-600">Total</span>
-                {selectedService?.payOnSite ? (
-                  <span className="text-sm font-medium text-purple-700 heading-font">
-                    Pay at studio
-                  </span>
-                ) : (
-                  <span className="text-3xl font-bold text-purple-950 heading-font">
-                    {selectedVariant ? `\u20AC${selectedVariant.price}` : "---"}
-                  </span>
-                )}
+                <span className="text-3xl font-bold text-purple-950 heading-font">
+                  {selectedVariant ? `\u20AC${selectedVariant.price}` : "---"}
+                </span>
               </div>
 
               <button

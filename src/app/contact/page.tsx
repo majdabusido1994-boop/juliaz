@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import {
   Mail,
   Phone,
@@ -261,6 +262,17 @@ export default function ContactPage() {
               </button>
             </form>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="pb-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <NewsletterSignup
+            variant="light"
+            title="Join the Newsletter"
+            subtitle="Updates on classes and events. No spam, just a monthly note to share what’s coming up."
+          />
         </div>
       </section>
 

@@ -5,26 +5,27 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef, useEffect } from "react";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const services = [
   {
-    title: "Intuitive Massage & Reiki",
+    title: "Intuitive Touch & Reiki",
     description:
-      "A healing blend of intuitive bodywork and Reiki energy channeling. Each session flows to where your body needs it most.",
+      "A mix of intuitive touch and Reiki. Each session follows what’s there, through touch and presence.",
     image: "/img/reiki-massage.jpg",
-    href: "/services#intuitive-massage-reiki",
+    href: "/services#intuitive-touch-reiki",
   },
   {
     title: "Reiki",
     description:
-      "A gentle yet profound energy healing practice rooted in ancient Japanese tradition. Promoting balance on all levels.",
+      "A gentle, hands-on energy practice. A quiet space to rest and arrive into the body.",
     image: "/img/studio-2.jpg",
     href: "/services#reiki",
   },
   {
     title: "Classes & Events",
     description:
-      "Embodied Yin, Shake the Dust, and monthly community events. Trauma-informed movement to support body awareness.",
+      "Embodied Yin, Shake the Dust, and monthly community sessions.",
     image: "/img/shake-the-dust.jpg",
     href: "/services#classes",
   },
@@ -86,7 +87,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="text-base md:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed mt-6"
+            className="text-xs sm:text-sm md:text-base text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed mt-6 whitespace-nowrap"
           >
             Somatic Movement. Yoga. Reiki. Intuitive touch.
           </motion.p>
@@ -95,17 +96,17 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <Link
               href="/book"
-              className="px-8 py-4 bg-gold-500 text-white font-semibold rounded-full hover:bg-gold-400 transition-all duration-300 text-sm tracking-wide cursor-pointer"
+              className="px-6 py-2.5 bg-gold-500 text-white font-semibold rounded-full hover:bg-gold-400 transition-all duration-300 text-xs tracking-wide cursor-pointer"
             >
               Book a Session
             </Link>
             <Link
               href="/services"
-              className="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-sm tracking-wide cursor-pointer"
+              className="px-6 py-2.5 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-xs tracking-wide cursor-pointer"
             >
               Explore Offerings
             </Link>
@@ -194,6 +195,13 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ── */}
+      <section className="py-16 lg:py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <NewsletterSignup variant="light" />
         </div>
       </section>
 

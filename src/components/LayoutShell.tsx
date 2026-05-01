@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import MusicPlayer from "@/components/MusicPlayer";
 
 export default function LayoutShell({
@@ -23,7 +22,6 @@ export default function LayoutShell({
       <Navbar />
       <main className="page-transition">{children}</main>
       <Footer />
-      <WhatsAppButton />
       <MusicPlayer />
     </>
   );

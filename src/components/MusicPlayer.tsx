@@ -21,13 +21,13 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 flex items-center gap-3">
+    <div className="fixed top-20 right-4 z-40 flex items-center gap-3">
       <audio ref={audioRef} loop preload="none">
         <source src="/vid/ambient.mp3" type="audio/mpeg" />
       </audio>
       <button
         onClick={toggleMusic}
-        className={`group relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border transition-all duration-300 ${
+        className={`group relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all duration-300 ${
           playing
             ? "border-gold-400 bg-gold-50 text-gold-600 shadow-md"
             : "border-gray-200 bg-white text-gray-400 hover:border-purple-300 hover:text-purple-600"
@@ -43,11 +43,6 @@ export default function MusicPlayer() {
         )}
       </button>
 
-      {showPrompt && !playing && (
-        <span className="rounded-xl bg-white px-4 py-2.5 text-xs text-purple-700 shadow-lg border border-gray-200">
-          Play ambient music
-        </span>
-      )}
     </div>
   );
 }

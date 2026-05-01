@@ -1,7 +1,16 @@
 <!DOCTYPE html>
-<html>
-  <head><title>Netlify Forms</title></head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Netlify Forms</title>
+  </head>
   <body>
+    <form name="newsletter" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+    </form>
     <form name="booking" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="bot-field" />
       <input type="text" name="service" />

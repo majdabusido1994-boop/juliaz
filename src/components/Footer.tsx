@@ -32,9 +32,7 @@ export default function Footer() {
               Julia <span className="text-gradient-gold">Josefiina</span>
             </h3>
             <p className="text-purple-300 text-sm leading-relaxed max-w-xs mt-4">
-              Yoga teacher, somatic movement facilitator, and Reiki Master.
-              Supporting nervous system regulation, awareness, and a deeper
-              connection to your body.
+              Somatic Movement. Yoga. Reiki. Intuitive touch.
             </p>
           </div>
 
@@ -100,7 +98,7 @@ export default function Footer() {
 
         <div className="mt-16 pt-8 border-t border-purple-800 text-center">
           <p className="text-purple-400 text-sm">
-            &copy; {new Date().getFullYear()} Julia Josefiina Taivalm&auml;ki. All rights reserved.
+            &copy; {new Date().getFullYear()} Julia Josefiina. All rights reserved.
           </p>
         </div>
       </div>
